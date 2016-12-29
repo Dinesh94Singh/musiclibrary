@@ -1,0 +1,11 @@
+BEGIN;
+--
+-- Create model Album
+--
+CREATE TABLE "music_content_album" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "artist" varchar(200) NOT NULL, "album_title" varchar(500) NOT NULL, "genre" varchar(300) NOT NULL, "album_logo" varchar(1000) NOT NULL);
+--
+-- Create model Song
+--
+CREATE TABLE "music_content_song" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "file_type" varchar(10) NOT NULL, "song_title" varchar(250) NOT NULL, "album_id" integer NOT NULL REFERENCES "music_content_album" ("id"));
+CREATE INDEX "music_content_song_95c3b9df" ON "music_content_song" ("album_id");
+COMMIT;

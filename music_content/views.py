@@ -1,21 +1,19 @@
-from django.http import HttpResponse
-from .models import Album, Song
+from django.http import Http404
+from .models import Album
+from django.shortcuts import render
 
 
 def index(request):
     all_albums = Album.objects.all()
-
-    html = ''
-    for album in all_albums:
-        url = '/music_context/' + str(album.id) + '/'
-        html += '<a href="' + url + '">' + album.album_title + '</a><br>'
-    return HttpResponse('<h2> Welcome with music_content </h2> ')
+    context = {'all_albums': all_albums}
+    # context is the information our template needs
+    return render(request, 'music_content/index', context)
 
 
 def detail(request, album_id):
-    all_songs = Song.objects.all()
-    html = ''
-    for song in all_songs:
-        url = '/music/context/' + str(song.id) + '/'
-        html += '<a href="' + url + '">' + song.song_title + '</a><br>'
-    return HttpResponse('<h2> Welcome to detail_page of ' + str(album_id) + '</h2>')
+    try:
+        album = Album.objects.get(pk=int(album_id))
+    except Exception:
+        raise Http404(" Album not Found !! ")
+    context = {'album': album}
+    return render(request, 'music_content/detail.html', context)

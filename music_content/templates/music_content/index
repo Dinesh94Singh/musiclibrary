@@ -1,9 +1,0 @@
-{% if all_albums %}
-    <ul>
-        {% for album in all_albums %}
-        <li><a href="/music_content/{{ album.id }}">{{ album.album_title }}</a> </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <h2> No Albums found </h2>
-{% endif %}

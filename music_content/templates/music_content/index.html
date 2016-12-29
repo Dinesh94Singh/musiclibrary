@@ -1,0 +1,30 @@
+<!--{% if all_albums %}
+    <ul>
+        {% for album in all_albums %}
+        <li><a href="/music_content/{{ album.id }}">{{ album.album_title }}</a> </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h2> No Albums found </h2>
+{% endif %}
+Hard coded stuff, now we have to remove it.
+-->
+
+<!--Instead of hard-coding, we are writing url, since from urls.py
+     in our app, we have the href link regex exp which states the number
+
+     Also, we are passing which regex, so we give the name attribute value beside url ( in our example 'detail')
+
+     and the number which we need to pass is our album.id
+     -->
+
+{% if all_albums %}
+<ul>
+    {% for album in all_albums %}
+
+    <li><a href="{% url 'music:detail' album.id %}">{{ album.album_title }}</a>  </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h2> No albums Found </h2>
+{% endif %}

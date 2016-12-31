@@ -12,10 +12,11 @@ app_name = 'music'
 # (like a url for logout where logout code should happen and another/home page gets loaded)
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
-    url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'album/add/$', views.AlbumCreate.as_view(), name='album-add'),
 ]
 
 # what does the above regex say ?
 # It wants us to consider a number and pass it as album_id to views detail function
+# No pk for CreateView because, we are creating the view
